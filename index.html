@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chocolate Day 🍫</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+  }
+
+  .box {
+    background: rgba(0,0,0,0.25);
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  button {
+    background: #ffcc70;
+    border: none;
+    padding: 15px 25px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  button:hover {
+    background: #ffd98e;
+  }
+
+  #message {
+    margin-top: 20px;
+    font-size: 18px;
+    min-height: 60px;
+  }
+</style>
+</head>
+
+<body>
+  <div class="box">
+    <h1>Happy Chocolate Day 🍫</h1>
+    <p>Tap slowly… one chocolate at a time 🤍</p>
+    <button onclick="unwrap()">🍫 Unwrap Chocolate</button>
+    <div id="message"></div>
+  </div>
+
+<script>
+  const messages = [
+    "This chocolate is for your smile 😊",
+    "This one is for the days you miss me 🌙",
+    "This one is for the warmth you bring in my life 🤍",
+    "This one melts… just like my heart when you laugh 🍫",
+    "No real chocolate today… but my feelings are 100% real 🫶",
+    "Save the last chocolate… it’s for the day we finally meet 🌸"
+  ];
+
+  let index = 0;
+
+  function unwrap() {
+    if (index < messages.length) {
+      document.getElementById("message").innerText = messages[index];
+      index++;
+    } else {
+      document.getElementById("message").innerText = "That’s all for today… but not for us 💞";
+    }
+  }
+</script>
+
+</body>
+</html>
