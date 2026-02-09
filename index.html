@@ -2,83 +2,144 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Chocolate Day 🍫</title>
+<title>Bunny & Spider 🍫</title>
+
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    text-align: center;
-  }
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #1b1b2f, #162447);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  color: white;
+}
 
-  .box {
-    background: rgba(0,0,0,0.25);
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  }
+.container {
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 25px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
 
-  h1 {
-    margin-bottom: 10px;
-  }
+.characters {
+  display: flex;
+  justify-content: space-between;
+  font-size: 60px;
+  margin-bottom: 10px;
+}
 
-  button {
-    background: #ffcc70;
-    border: none;
-    padding: 15px 25px;
-    font-size: 16px;
-    border-radius: 30px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
+.bunny {
+  animation: hop 2s infinite;
+}
 
-  button:hover {
-    background: #ffd98e;
-  }
+.spider {
+  animation: sway 3s infinite;
+}
 
-  #message {
-    margin-top: 20px;
-    font-size: 18px;
-    min-height: 60px;
-  }
+@keyframes hop {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sway {
+  0%,100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+
+button {
+  background: #fbc531;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button:hover {
+  background: #ffd56b;
+}
+
+#message {
+  margin-top: 20px;
+  font-size: 18px;
+  min-height: 70px;
+}
+
+.heart {
+  position: absolute;
+  color: pink;
+  font-size: 20px;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
 </style>
 </head>
 
 <body>
-  <div class="box">
-    <h1>Happy Chocolate Day 🍫</h1>
-    <p>Tap slowly… one chocolate at a time 🤍</p>
-    <button onclick="unwrap()">🍫 Unwrap Chocolate</button>
-    <div id="message"></div>
+
+<div class="container">
+  <div class="characters">
+    <div class="bunny">🐰</div>
+    <div class="spider">🕷️</div>
   </div>
 
+  <h2>Chocolate Day 🍫</h2>
+  <p>Bunny has chocolates for her Spider…<br>open slowly 🤍</p>
+
+  <button onclick="unwrap()">🍫 Unwrap Chocolate</button>
+
+  <div id="message"></div>
+
+  <audio id="voice" src="voice.mp3"></audio>
+</div>
+
 <script>
-  const messages = [
-    "This chocolate is for your smile 😊",
-    "This one is for the days you miss me 🌙",
-    "This one is for the warmth you bring in my life 🤍",
-    "This one melts… just like my heart when you laugh 🍫",
-    "No real chocolate today… but my feelings are 100% real 🫶",
-    "Save the last chocolate… it’s for the day we finally meet 🌸"
-  ];
+const messages = [
+  "🐰: Ye chocolate... for your all efforts like your gifts, bahane and everything 😊",
+  "🕷️: Aur ye whenever you miss me 🌙",
+  "🐰: This one to ask for bohot saari kisses  🤍",
+  "🕷️: Well chocolate virtual hai… but you know. rest everything is real 🍫",
+  "🐰: Last chocolate with something special (my bohot saaraaa love) …"
+];
 
-  let index = 0;
+let index = 0;
 
-  function unwrap() {
-    if (index < messages.length) {
-      document.getElementById("message").innerText = messages[index];
-      index++;
-    } else {
-      document.getElementById("message").innerText = "That’s all for today… but not for us 💞";
-    }
+function unwrap() {
+  if (index < messages.length) {
+    document.getElementById("message").innerText = messages[index];
+    createHeart();
+    index++;
+  } else {
+    document.getElementById("message").innerHTML =
+      "🎧 Play this… Bunny ne dil se bola hai 🐰🤍<br><br>" +
+      "<button onclick='playVoice()'>▶ Play Voice</button>";
   }
+}
+
+function playVoice() {
+  document.getElementById("voice").play();
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}
 </script>
 
 </body>
